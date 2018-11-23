@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./build_vocab.sh
+./build_vocab.sh $1
 ./cut_vocab.sh
 python3 pickle_vocab.py
 python3 cooc.py
