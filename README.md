@@ -5,6 +5,8 @@ __[Description](https://github.com/epfml/ML_course/tree/master/projects/project2
 
 __[Competition](https://www.crowdai.org/challenges/epfl-ml-text-classification/)__
 
+__Convention__ Twitter data files found in data/twitterdatasets/
+
 # Project Text Sentiment Classification
 
 The task of this competition is to predict if a tweet message used to contain a positive :) or negative :( smiley, by considering only the remaining text.
