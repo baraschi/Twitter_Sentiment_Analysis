@@ -5,7 +5,7 @@ __[Description](https://github.com/epfml/ML_course/tree/master/projects/project2
 
 __[Competition](https://www.crowdai.org/challenges/epfl-ml-text-classification/)__
 
-__Convention__ Twitter data files found in data/twitterdatasets/
+__Convention__ Twitter data files found in data/twitter-datasets/
 
 # Project Text Sentiment Classification
 
