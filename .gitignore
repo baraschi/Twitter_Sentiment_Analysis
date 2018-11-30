@@ -1,7 +1,10 @@
 #Data
-Data/
-.pkl
-.npy
+data/
+
+#Pickle Extension
+*.pk
+#Numpy Extension
+*.npy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
