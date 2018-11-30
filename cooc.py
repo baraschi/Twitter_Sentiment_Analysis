@@ -3,7 +3,7 @@ from scipy.sparse import *
 import numpy as np
 import pickle
 
-
+TWITTER_DATA  = 'data/twitter-datasets/'
 def main():
     with open('vocab.pkl', 'rb') as f:
         vocab = pickle.load(f)
@@ -11,7 +11,7 @@ def main():
 
     data, row, col = [], [], []
     counter = 1
-    for fn in ['Data/twitter-datasets/train_pos.txt', 'Data/twitter-datasets/train_neg.txt']:
+    for fn in [TWITTER_DATA+'train_pos.txt', TWITTER_DATA+'train_neg.txt']:
         with open(fn) as f:
             for line in f:
                 tokens = [vocab.get(t, -1) for t in line.strip().split()]
