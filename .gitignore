@@ -5,7 +5,7 @@
 data/
 
 #Pickle Extension
-*.pk
+*.pkl
 #Numpy Extension
 *.npy
 
