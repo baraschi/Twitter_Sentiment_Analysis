@@ -1,7 +1,13 @@
+#Mac DS
+*.DS_Store
+
 #Data
-Data/
-.pkl
-.npy
+data/
+
+#Pickle Extension
+*.pkl
+#Numpy Extension
+*.npy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
