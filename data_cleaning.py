@@ -1,3 +1,4 @@
+from constants import *
 from nltk.stem.porter import *
 from nltk.corpus import stopwords
 import numpy as np
@@ -18,6 +19,7 @@ def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, r
     # stitch stems back together
     data[new_column] = stitch(stemmed_tokens)
     return data
+
 
 # find pattern in text and replace
 def remove_pattern(text, pattern, replace):
