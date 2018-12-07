@@ -35,6 +35,6 @@ def main():
             ys[jy, :] += scale * x
     np.save('embeddings', xs)
 
-
+	
 if __name__ == '__main__':
     main()
