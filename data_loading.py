@@ -3,7 +3,7 @@ import pandas as pd
 
 # Load txt file
 def load_txt(file):
-    return open(file).readlines()
+    return open(file, encoding='utf-8').readlines()
 
 
 # Create DataFrame from loaded txt file.
