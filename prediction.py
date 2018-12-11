@@ -87,18 +87,14 @@ def classify_fasttext(train, test, tweets_col = "clean_tweet", filename = "fastt
         train_fasttext, validation_fasttext = train_test_split(train[['label_prefixed',tweets_col]], random_state=42, test_size=0.3)
 
         train_validation_name = "data/" + filename + "_train_validation.txt"
-        train_name = "data/" + filename + "_train.txt"
 
         #train set
         train_fasttext.to_csv(train_validation_name, columns = ['label_prefixed',tweets_col], index=False)
-        train[['label_prefixed',tweets_col]].to_csv(train_name, columns = ['label_prefixed',tweets_col], index=False)
 
         classifier_validation = fasttext.supervised(train_validation_name, 'model_supervised', label_prefix='__label__')
-        classifier_test = fasttext.supervised(train_name, 'model_supervised', label_prefix='__label__')
 
         #here we append a ' ' char at the end to avoid an IndexOutOfBound exception
         labels_validation = classifier_validation.predict(validation_fasttext[tweets_col].apply(lambda s: str(s) + ' '))
-        labels_test = classifier_test.predict(test[tweets_col].apply(lambda s: str(s) + ' '))
         
         #formatting
         validation_fasttext['label'] = validation_fasttext['label_prefixed'].apply(lambda s: int(s.replace("__label__", "").strip()))
@@ -109,6 +105,13 @@ def classify_fasttext(train, test, tweets_col = "clean_tweet", filename = "fastt
         if accuracy > best_accuracy:
             best_accuracy = accuracy
             i_best = i
+            
+            #we have a better result so we predict on test set
+            train_name = "data/" + filename + "_train.txt"
+            train[['label_prefixed',tweets_col]].to_csv(train_name, columns = ['label_prefixed',tweets_col], index=False)
+            classifier_test = fasttext.supervised(train_name, 'model_supervised', label_prefix='__label__')
+            labels_test = classifier_test.predict(test[tweets_col].apply(lambda s: str(s) + ' '))
+
             submission_to_csv(format_submission(labels_test), filename + "_" + tweets_col)
 
             #labels = classifier.predict(load_txt(TEST_DATA))
