@@ -5,19 +5,32 @@ import numpy as np
 import re
 
 
-def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement):
+def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement, option):
     # remove pattern '<user>' from tweets, since it is useless for our analysis
     data[new_column] = np.vectorize(remove_pattern)(data[old_column], pattern_to_remove, '')
     # replace special characters, numbers and punctuations, except chars & hashtags
-    data[new_column] = replace_pattern(data[new_column], pattern_to_replace, replacement)
+
+    if option[0] :
+        print("with replace pattern ==============================================================================")
+        print("===================================================================================================")
+        data[new_column] = replace_pattern(data[new_column], pattern_to_replace, replacement)
+    if option[1] :
     # remove stop words
-    data[new_column] = remove_stop_words(data[new_column])
+        print("with removed stop words ===========================================================================")
+        print("===================================================================================================")
+        data[new_column] = remove_stop_words(data[new_column])
+
     # tokenize data
     tokens = tokenize(data[new_column])
     # stem data
-    stemmed_tokens = stem(tokens)
+    if option[2] :
+        print("with steming ======================================================================================")
+        print("===================================================================================================")
+        stemmed_tokens = stem(tokens)
     # stitch stems back together
-    data[new_column] = stitch(stemmed_tokens)
+        data[new_column] = stitch(stemmed_tokens)
+    else :
+        data[new_column] = stitch(tokens)
     return data
 
 
