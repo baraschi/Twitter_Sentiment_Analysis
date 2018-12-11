@@ -41,8 +41,9 @@ def classify_bow(train, tweets_col = 'clean_tweet'):
     prediction_int = prediction[:,1] >= 0.3 # if prediction is greater than or equal to 0.3 than 1 else 0
     prediction_int = prediction_int.astype(np.int)
 
-    print(prediction_int)
+    #print(prediction_int)
     print(f1_score(yvalid, prediction_int)) # calculating f1 score
+    return lreg
     
 def classify_tfidf(train, tweets_col = 'clean_tweet'):
     tfidf_vectorizer = TfidfVectorizer(max_df=0.90, min_df=2, max_features=1000, stop_words='english')
@@ -60,27 +61,45 @@ def classify_tfidf(train, tweets_col = 'clean_tweet'):
     prediction = lreg.predict_proba(xvalid_tfidf)
     prediction_int = prediction[:,1] >= 0.3
     prediction_int = prediction_int.astype(np.int)
-    print(prediction_int)
+    #print(prediction_int)
     print(f1_score(yvalid, prediction_int))
+    return lreg
     
 def classify_fasttext(train, tweets_col = "clean_tweet", csv_name = "fasttext_clean", max_iter = 200):
+    filename = "fasttext_labeled"
     best_precision = 0;
+    best_classifier = None
     i_best = -1;
 
     for i in range(0,max_iter):
-        train_name, test_name = create_labeled_csv(train, tweets_col = "clean_tweet", split_test = True)
+               # create column with correct label format for fasttext: '__label__0 '
+        train['label_prefixed'] = train['label'].apply(lambda s: '__label__' + str(s) + ' ')
+        train_fasttext, test_fasttext = train_test_split(train[['label_prefixed',tweets_col]], random_state=42, test_size=0.3)
+
+        train_name = "data/" + filename + "_train.txt"
+
+        #train set
+        train_fasttext.to_csv(train_name, columns = ['label_prefixed',tweets_col], index=False)
+
         classifier = fasttext.supervised(train_name, 'model_supervised', label_prefix='__label__')
 
-        result = classifier.test(test_name)
-        #print('P@1:', result.precision)
-        #print('R@1:', result.recall)
-        #print('Number of examples:', result.nexamples)
-        if result.precision > best_precision:
-            # print('\tprecision: ' + str(best_precision) + ' --> ' + str(result.precision))
-            best_precision = result.precision
+        #here we append a ' ' char at the end to avoid an IndexOutOfBound exception
+        test_labels = classifier.predict(test_fasttext[tweets_col].apply(lambda s: str(s) + ' '))
+        
+        #formatting
+        test_fasttext['label'] = test_fasttext['label_prefixed'].apply(lambda s: int(s.replace("__label__", "").strip()))
+        test_labels = [int(y) for x in test_labels for y in x]
+        
+        precision = f1_score(test_fasttext['label'].tolist(), test_labels)
+        
+        if precision > best_precision:
+            best_precision = precision
+            best_classifier = classifier
             i_best = i
+            #labels = classifier.predict(load_txt(TEST_DATA))
+            #submission_to_csv(format_submission(labels), csv_name)
 
-            labels = classifier.predict(load_txt(TEST_DATA))
-            submission_to_csv(format_submission(labels), csv_name)
-            
+
+
         printOver('\033[1mclassifying:\033[0m '+ str( (i+1)/ max_iter * 100) + '%, best_acc=' + str(best_precision))
+    return best_classifier
