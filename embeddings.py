@@ -9,9 +9,9 @@ def create_labeled_csv(tweets, tweets_col = "clean_tweet", label_col = "label", 
         test_name = "data/" + filename + "_test.txt"
         train_name = "data/" + filename + "_train.txt"
         # test set
-        tweets.loc[:length/5].to_csv(test_name, columns = ['label_prefixed',tweets_col], index=False)
+        tweets.loc[:length/6].to_csv(test_name, columns = ['label_prefixed',tweets_col], index=False)
         #train set
-        tweets.loc[length/5+ 1:].to_csv(train_name, columns = ['label_prefixed',tweets_col], index=False)
+        tweets.loc[length/6+ 1:].to_csv(train_name, columns = ['label_prefixed',tweets_col], index=False)
         return train_name, test_name
     else:
         name = "data/" + filename + ".txt"
