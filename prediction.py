@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
 from embeddings import *
 from data_loading import *
 from constants import *
@@ -42,7 +42,7 @@ def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow"):
     lreg_validation = LogisticRegression()
     lreg_validation.fit(xtrain_bow, ytrain) # training the model
     prediction_validation = lreg_validation.predict(xvalid_bow) # predicting on the validation set
-    accuracy = f1_score(yvalid, prediction_validation)
+    accuracy = accuracy_score(yvalid, prediction_validation)
     
     # regression using test set
     lreg_test = LogisticRegression()
@@ -65,7 +65,7 @@ def classify_tfidf(train, test, tweets_col = CLEAN_TWEET, filename = "tfidf"):
     lreg_validation = LogisticRegression()
     lreg_validation.fit(xtrain_tfidf, ytrain)
     prediction_validation = lreg_validation.predict(xvalid_tfidf) # predicting on the validation set
-    accuracy = f1_score(yvalid, prediction_validation)
+    accuracy = accuracy_score(yvalid, prediction_validation)
 
     # regression using test set
     lreg_test = LogisticRegression()
@@ -100,7 +100,7 @@ def classify_fasttext(train, test, tweets_col = "clean_tweet", filename = "fastt
         validation_fasttext['label'] = validation_fasttext['label_prefixed'].apply(lambda s: int(s.replace("__label__", "").strip()))
         labels_validation = [int(y) for x in labels_validation for y in x]
         
-        accuracy = f1_score(validation_fasttext['label'].tolist(), labels_validation)
+        accuracy = accuracy_score(validation_fasttext['label'].tolist(), labels_validation)
         
         if accuracy > best_accuracy:
             best_accuracy = accuracy
