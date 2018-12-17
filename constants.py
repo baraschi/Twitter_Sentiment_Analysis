@@ -1,6 +1,7 @@
 CLEAN_TWEET = 'clean_tweet'
 DATA_FOLDER = 'data/'
 PREDS_FOLDER = 'preds/'
+PLOTS_FOLDER = 'plots/'
 
 HASH_NEG = 'neg_hashtags'
 HASH_POS = 'pos_hashtags'

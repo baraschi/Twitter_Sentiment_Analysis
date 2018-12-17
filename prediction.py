@@ -30,8 +30,8 @@ def predict_and_submit(classifier, test_texts, filename):
     labels = classifier.predict(test_texts)
     submission_to_csv(format_submission(labels), filename)
     
-def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow",ngram_range=(1,1)):
-    bow_vectorizer = CountVectorizer(max_df=0.90, min_df=2, max_features=1000, stop_words='english', ngram_range=ngram_range)
+def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow", max_df = 0.90, min_df  = 1, max_features=1000, ngram_range=(1,1)):
+    bow_vectorizer = CountVectorizer(max_df=max_df, min_df=min_df, max_features=max_features, stop_words='english', ngram_range=ngram_range)
     
     # bag-of-words feature matrix
     train_bow = bow_vectorizer.fit_transform(train[tweets_col])
@@ -53,7 +53,7 @@ def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow",ngram_r
     
     return accuracy
     
-def classify_tfidf(train, test, tweets_col = CLEAN_TWEET, filename = "tfidf", max_df = 0.90, min_df = 1, max_features =1000, ngram_range=(1,1)):
+def classify_tfidf(train, test, tweets_col = CLEAN_TWEET, filename = "tfidf", max_df = 0.90, min_df = 1, max_features=1000, ngram_range=(1,1)):
     tfidf_vectorizer = TfidfVectorizer(max_df=max_df, min_df=min_df, max_features=max_features, stop_words='english', ngram_range=ngram_range)
 
     # TF-IDF feature matrix
