@@ -30,12 +30,13 @@ def predict_and_submit(classifier, test_texts, filename):
     labels = classifier.predict(test_texts)
     submission_to_csv(format_submission(labels), filename)
     
-def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow", max_df = 0.90, min_df  = 1, max_features=1000, ngram_range=(1,1)):
+def classify_bow(train, test = None, tweets_col = CLEAN_TWEET, filename = "bow", max_df = 0.90, min_df  = 1, max_features=1000, ngram_range=(1,1)):
     bow_vectorizer = CountVectorizer(max_df=max_df, min_df=min_df, max_features=max_features, stop_words='english', ngram_range=ngram_range)
     
     # bag-of-words feature matrix
     train_bow = bow_vectorizer.fit_transform(train[tweets_col])
-    test_bow = bow_vectorizer.transform(test[tweets_col])
+    if test is not None:
+        test_bow = bow_vectorizer.transform(test[tweets_col])
     
     # splitting data into training and validation set
     xtrain_bow, xvalid_bow, ytrain, yvalid = train_test_split(train_bow, train['label'], random_state=42, test_size=0.3)
@@ -44,21 +45,23 @@ def classify_bow(train, test, tweets_col = CLEAN_TWEET, filename = "bow", max_df
     prediction_validation = lreg_validation.predict(xvalid_bow) # predicting on the validation set
     accuracy = accuracy_score(prediction_validation,yvalid)
     
-    # regression using test set
-    lreg_test = LogisticRegression()
-    lreg_test.fit(train_bow, train['label']) # training the model
-    prediction_test = lreg_test.predict(test_bow)
-    
-    submission_to_csv(format_submission(prediction_test.tolist()), filename + "_" + tweets_col)
+    if test is not None:
+        # regression using test set
+        lreg_test = LogisticRegression()
+        lreg_test.fit(train_bow, train['label']) # training the model
+        prediction_test = lreg_test.predict(test_bow)
+
+        submission_to_csv(format_submission(prediction_test.tolist()), filename + "_" + tweets_col)
     
     return accuracy
     
-def classify_tfidf(train, test, tweets_col = CLEAN_TWEET, filename = "tfidf", max_df = 0.90, min_df = 1, max_features=1000, ngram_range=(1,1)):
+def classify_tfidf(train, test = None, tweets_col = CLEAN_TWEET, filename = "tfidf", max_df = 0.90, min_df = 1, max_features=1000, ngram_range=(1,1)):
     tfidf_vectorizer = TfidfVectorizer(max_df=max_df, min_df=min_df, max_features=max_features, stop_words='english', ngram_range=ngram_range)
 
     # TF-IDF feature matrix
     train_tfidf = tfidf_vectorizer.fit_transform(train[tweets_col])
-    test_tfidf = tfidf_vectorizer.transform(test[tweets_col])
+    if test is not None:
+        test_tfidf = tfidf_vectorizer.transform(test[tweets_col])
    
     # splitting data into training and validation set
     xtrain_tfidf, xvalid_tfidf, ytrain, yvalid = train_test_split(train_tfidf, train['label'], random_state=42, test_size=0.3)
@@ -72,11 +75,12 @@ def classify_tfidf(train, test, tweets_col = CLEAN_TWEET, filename = "tfidf", ma
     accuracy = accuracy_score(prediction_validation_int,yvalid)
 
     # regression using test set
-    prediction_test = lreg_validation.predict_proba(test_tfidf) # predicting on the test set
-    prediction_test_int = prediction_test[:,1] >= 0.5 # if prediction is greater than or equal to 0.5 than 1 else 0
-    prediction_test_int = prediction_test_int.astype(np.int)
-    
-    submission_to_csv(format_submission(prediction_test_int.tolist()), filename + "_" + tweets_col)
+    if test is not None:
+        prediction_test = lreg_validation.predict_proba(test_tfidf) # predicting on the test set
+        prediction_test_int = prediction_test[:,1] >= 0.5 # if prediction is greater than or equal to 0.5 than 1 else 0
+        prediction_test_int = prediction_test_int.astype(np.int)
+
+        submission_to_csv(format_submission(prediction_test_int.tolist()), filename + "_" + tweets_col)
     
     return accuracy
     

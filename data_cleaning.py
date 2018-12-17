@@ -5,32 +5,31 @@ import numpy as np
 import re
 
 
-def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement, option):
+def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement, options):
+    display("Before dup: " + str(data.shape))
+    if options['duplicates']:
+        data.drop_duplicates(subset = [old_column], inplace = True)
+        data = data.reset_index()
+
     # remove pattern '<user>' from tweets, since it is useless for our analysis
     data[new_column] = np.vectorize(remove_pattern)(data[old_column], pattern_to_remove, '')
     # replace special characters, numbers and punctuations, except chars & hashtags
 
-    if option[0] :
-        print("with replace pattern ==============================================================================")
-        print("===================================================================================================")
+    if options['replace_pattern'] :
         data[new_column] = replace_pattern(data[new_column], pattern_to_replace, replacement)
-    if option[1] :
+        
+    if options['stop_words'] :
     # remove stop words
-        print("with removed stop words ===========================================================================")
-        print("===================================================================================================")
         data[new_column] = remove_stop_words(data[new_column])
 
-    # tokenize data
-    tokens = tokenize(data[new_column])
-    # stem data
-    if option[2] :
-        print("with steming ======================================================================================")
-        print("===================================================================================================")
+    if options['stemming'] :
+        # tokenize data
+        tokens = tokenize(data[new_column])
+        # stem data
         stemmed_tokens = stem(tokens)
-    # stitch stems back together
+        # stitch stems back together
         data[new_column] = stitch(stemmed_tokens)
-    else :
-        data[new_column] = stitch(tokens)
+        
     return data
 
 
