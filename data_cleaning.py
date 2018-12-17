@@ -6,10 +6,9 @@ import re
 
 
 def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement, options):
-    display("Before dup: " + str(data.shape))
     if options['duplicates']:
         data.drop_duplicates(subset = [old_column], inplace = True)
-        data = data.reset_index()
+        data = data.reset_index(drop=True)
 
     # remove pattern '<user>' from tweets, since it is useless for our analysis
     data[new_column] = np.vectorize(remove_pattern)(data[old_column], pattern_to_remove, '')
