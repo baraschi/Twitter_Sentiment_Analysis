@@ -121,3 +121,4 @@ preds/tfidf_clean_tweet.csv
 preds/tfidf_tweet.csv
 plots/plot_bow.pdf
 plots/plot_tfidf.pdf
+Start Notebook.bat
