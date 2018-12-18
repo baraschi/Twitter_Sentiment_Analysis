@@ -1,0 +1,1 @@
+jupyter notebook --ip=10.241.87.217 --port=8888
