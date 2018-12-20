@@ -4,8 +4,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from embeddings import *
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import cross_val_predict
 from data_loading import *
 from constants import *
 from utils import *
@@ -45,6 +45,9 @@ def classify_bow(train, test = None, tweets_col = CLEAN_TWEET, filename = "bow",
     lreg.fit(xtrain_bow, ytrain)
     prediction_validation = lreg.predict(xvalid_bow) # predicting on the validation set
     accuracy = accuracy_score(prediction_validation,yvalid)
+    
+    cross_pred = cross_val_predict(lreg, xtrain_bow, ytrain, cv=5, n_jobs = 4)
+    print(classification_report(ytrain, cross_pred))
 
     # regression using test set
     if test is not None:
@@ -69,6 +72,9 @@ def classify_tfidf(train, test = None, tweets_col = CLEAN_TWEET, filename = "tfi
     lreg.fit(xtrain_tfidf, ytrain)
     prediction_validation = lreg.predict(xvalid_tfidf) # predicting on the validation set
     accuracy = accuracy_score(prediction_validation,yvalid)
+    
+    cross_pred = cross_val_predict(lreg, xtrain_tfidf, ytrain, cv=5, n_jobs = 4)
+    print(classification_report(ytrain, cross_pred))
 
     # regression using test set
     if test is not None:
