@@ -5,20 +5,34 @@ import numpy as np
 import re
 
 
-def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement):
+def clean(data, old_column, new_column, pattern_to_remove, pattern_to_replace, replacement, options):
+    
+    new_data = data
+    
+    if options['duplicates']:
+        new_data = data.drop_duplicates(subset = [old_column])
+        new_data = new_data.reset_index(drop=True)
+
     # remove pattern '<user>' from tweets, since it is useless for our analysis
-    data[new_column] = np.vectorize(remove_pattern)(data[old_column], pattern_to_remove, '')
+    new_data[new_column] = np.vectorize(remove_pattern)(new_data[old_column], pattern_to_remove, '')
     # replace special characters, numbers and punctuations, except chars & hashtags
-    data[new_column] = replace_pattern(data[new_column], pattern_to_replace, replacement)
+
+    if options['replace_pattern'] :
+        new_data[new_column] = replace_pattern(new_data[new_column], pattern_to_replace, replacement)
+        
+    if options['stop_words'] :
     # remove stop words
-    data[new_column] = remove_stop_words(data[new_column])
-    # tokenize data
-    tokens = tokenize(data[new_column])
-    # stem data
-    stemmed_tokens = stem(tokens)
-    # stitch stems back together
-    data[new_column] = stitch(stemmed_tokens)
-    return data
+        new_data[new_column] = remove_stop_words(new_data[new_column])
+
+    if options['stemming'] :
+        # tokenize data
+        tokens = tokenize(new_data[new_column])
+        # stem data
+        stemmed_tokens = stem(tokens)
+        # stitch stems back together
+        new_data[new_column] = stitch(stemmed_tokens)
+        
+    return new_data
 
 
 # find pattern in text and replace
