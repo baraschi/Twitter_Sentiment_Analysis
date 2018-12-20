@@ -68,9 +68,8 @@ The leaderboard can be found on [crowdAI](https://www.crowdai.org/challenges/epf
 Our submission - username __baraschi__ / submission id __24870__ - can be found [here](https://www.crowdai.org/f77f5069c0fd).
 ### Contributors
 
-- Zoé Baraschi
-- Arnaud Boissaye
-- Louis-Maxence Garret
-___
+- [Zoé Baraschi](https://github.com/baraschi/)
+- [Arnaud Boissaye](https://github.com/lmgarret)
+- [Louis-Maxence Garret](https://github.com/GarfAbh)
 
 License: [MIT](https://opensource.org/licenses/MIT)
