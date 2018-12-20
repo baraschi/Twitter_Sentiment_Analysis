@@ -47,7 +47,7 @@ In order to run the project you will need the following dependencies installed:
     ```
  download all packages from the GUI
  
- * [Matplotlib](https://matplotlib.org/)
+ * [Matplotlib](https://matplotlib.org/) - *Optional* - Needed to see the beautiful plots on our notebook!
     ```sh
     $ pip install matplotlib
     ```
@@ -57,10 +57,13 @@ In order to run the project you will need the following dependencies installed:
     Download all files [here](https://www.crowdai.org/challenges/epfl-ml-text-classification/dataset_files) in order to train and test the models
     and move them in `data/twitter-datasets/` directory.
 
-* x.py
-#### Functions
-#### Function arguments
-#### Return type
+* data_cleaning.py - methods used for data cleaning
+* data_exploration.py - methods used to explore the data, like exctracting and countring hashtags
+* data_loading.py - methods used for data loading and DataFrame creation
+* prediction.py - methods to classify (BoW, TD-IDF) as well as to create the submission csv.
+* run.py - main class, uses above functions to generate best available submission.
+* Run_All_Combinations.ipynb - notebook we used to find best parameter combinations and to generate plots
+* Data_Exploration.ipynb - notebook we used to explore the data to find out what cleaning methods we needed to apply
 
 ### Reproduce Our Submission
 In order to produce the same submission corresponding to our [crowdAI](https://www.crowdai.org/challenges/epfl-ml-text-classification) ranking, just run the following command:
