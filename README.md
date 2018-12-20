@@ -70,7 +70,7 @@ Our submission - username __baraschi__ / submission id __24870__ - can be found 
 ### Contributors
 
 - [Zoé Baraschi](https://github.com/baraschi/)
-- [Arnaud Boissaye](https://github.com/lmgarret)
-- [Louis-Maxence Garret](https://github.com/GarfAbh)
+- [Arnaud Boissaye](https://github.com/GarfAbh)
+- [Louis-Maxence Garret](https://github.com/lmgarret)
 
 #### License: [MIT](https://opensource.org/licenses/MIT)
