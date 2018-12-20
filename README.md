@@ -63,12 +63,12 @@ In order to run the project you will need the following dependencies installed:
 #### Return type
 
 ### Reproduce Our Submission
-In order to produce the same submission corresponding to our crowdAI ranking, just run the following command:
+In order to produce the same submission corresponding to our [crowdAI](https://www.crowdai.org/challenges/epfl-ml-text-classification) ranking, just run the following command:
 ```sh 
 $ python3 run.py
 ```
 
-The submission can be found in the file 'preds/submission_clean_tweet.csv'
+The submission can be found in the file __preds/submission_clean_tweet.csv__
 ### Contributors
 
 - Zoé Baraschi
