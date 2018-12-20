@@ -1,12 +1,3 @@
-# Text Sentiment Classification
-Predict if a tweet message used to contain a positive :) or negative :( smiley, by considering only the remaining text.
-
-__[Description](https://github.com/epfml/ML_course/tree/master/projects/project2/project_text_classification)__
-
-__[Competition](https://www.crowdai.org/challenges/epfl-ml-text-classification/)__
-
-__Data__ Twitter data files found in data/twitter-datasets/
-
 ------------------------------------------------------------------
 Check this
 ------------------------------------------------------------------
@@ -72,10 +63,12 @@ In order to run the project you will need the following dependencies installed:
 #### Return type
 
 ### Reproduce Our Submission
+In order to produce the same submission corresponding to our crowdAI ranking, just run the following command:
+```sh 
+$ python3 run.py
+```
 
-    ```sh
-    $ python3 run.py
-    ```
+The submission can be found in the file 'preds/submission_clean_tweet.csv'
 ### Contributors
 
 - Zoé Baraschi
