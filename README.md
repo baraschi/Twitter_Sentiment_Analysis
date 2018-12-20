@@ -72,4 +72,4 @@ Our submission - username __baraschi__ / submission id __24870__ - can be found 
 - [Arnaud Boissaye](https://github.com/lmgarret)
 - [Louis-Maxence Garret](https://github.com/GarfAbh)
 
-License: [MIT](https://opensource.org/licenses/MIT)
+#### License: [MIT](https://opensource.org/licenses/MIT)
