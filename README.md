@@ -2,7 +2,7 @@
 
 In this report, we present a study of sentiment analysis on Twitter data, where the task is to predict whether the smiley contained in the tweet is happy :) or sad :(. 
 We experimented with today's most common solutions, such as text preprocessing and supervised classification techniques. We mixed-and-matched our algorithms to evaluate how it influenced the accuracy of our predictions. 
-Our predictor currently obtains an accuracy of: ...  : 
+Our predictor currently obtains an accuracy of: 0.85
 
 ## Description
 
