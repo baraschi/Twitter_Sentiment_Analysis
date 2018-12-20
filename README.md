@@ -32,20 +32,20 @@ In order to run the project you will need the following dependencies installed:
 
 ### Libraries
 
-* [Anaconda3] - Download and install Anaconda with python3
-* [Scikit-Learn] - Download scikit-learn library with conda
+* [Anaconda3](https://www.anaconda.com/download/) - Download and install Anaconda with python3
+* [Scikit-Learn](https://scikit-learn.org/stable/) - Download scikit-learn library with conda
 
     ```sh
     $ conda install scikit-learn
     ```
     
-* [Pandas]
+* [Pandas](https://pandas.pydata.org/)
 
     ```sh
     $ conda install pandas
     ```
     
-* [NLTK] - Download all packages of NLTK
+* [NLTK](https://www.nltk.org/) - Download all packages of NLTK
 
     ```sh
     $ python
@@ -53,18 +53,16 @@ In order to run the project you will need the following dependencies installed:
     $ >>> nltk.download()
     ```
  download all packages from the GUI
-
-
+ 
+ * [Matplotlib](https://matplotlib.org/)
+    ```sh
+    $ pip install matplotlib
+    ```
 ### Files
-* Train Data
+* Train and Test Data
 
-    Download the positive [Positive & Negative tweet files](https://inclass.kaggle.com/c/epfml-text/download/twitter-datasets.zip) in order to train the models
-    and move them in `data/datasets/` directory.
-
-* Test Data
-
-    Download the [Test tweet file](https://inclass.kaggle.com/c/epfml-text/download/test_data.txt) in order to test the models in kaggle
-    and move it in `data/datasets/` directory.
+    Download all files [here](https://www.crowdai.org/challenges/epfl-ml-text-classification/dataset_files) in order to train and test the models
+    and move them in `data/twitter-datasets/` directory.
 
 * x.py
 #### Functions
