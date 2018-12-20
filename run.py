@@ -68,13 +68,13 @@ def main(full = "full"):
 
     best_params = pd.DataFrame(columns=['method','n-gram','duplicates', 'replace_pattern','stop_words','stemming','nb_features','accuracy'])
     best_params = best_params.append({
-        'method': 'bow',
+        'method': 'tfidf',
         'n-gram': 3,
         'duplicates': 0,
         'replace_pattern': 1,
         'stop_words': 0,
-        'stemming': 0,
-        'nb_features': 100000
+        'stemming': 1,
+        'nb_features': 130000
     }, ignore_index = True)
 
     reproduce_best(best_params, train, test)
