@@ -72,6 +72,8 @@ $ python3 run.py
 ```
 
 The submission can be found in the file __preds/submission_clean_tweet.csv__
+
+Our submission can be found [here](https://www.crowdai.org/challenges/epfl-ml-text-classification) with username ... and submission id ...
 ### Contributors
 
 - Zoé Baraschi
