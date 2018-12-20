@@ -71,9 +71,11 @@ In order to run the project you will need the following dependencies installed:
 #### Function arguments
 #### Return type
 
-### Reproduce Our Score
+### Reproduce Our Submission
 
-
+    ```sh
+    $ python3 run.py
+    ```
 ### Contributors
 
 - Zoé Baraschi
