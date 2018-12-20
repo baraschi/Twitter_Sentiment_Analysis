@@ -1,14 +1,3 @@
-------------------------------------------------------------------
-Check this
-------------------------------------------------------------------
-
-– Reproducibility: In your submission, you must provide a script run.py which produces exactly the same .csv predictions which you used in your best submission to the competition on CrowdAI. This includes a clear ReadMe file explaining how to reproduce your setup, including precise training, prediction and installation instructions if additional libraries are used - the same way as if you would ideally instruct a new teammate to start working with your code.
-– Documentation: Your ML system must be clearly described in your PDF report and also well- documented in the code itself. A clear ReadMe file must be provided. The documentation must also include all data preparation, feature generation as well as cross-validation steps that you have used.
-– External ML libraries are allowed, as long as accurately cited and documented.
-– External datasets are allowed, as long as accurately cited and documented.
-
-------------------------------------------------------------------
-
 # Twitter Sentiment Analysis
 
 In this report, we present a study of sentiment analysis on Twitter data, where the task is to predict whether the smiley contained in the tweet is happy :) or sad :(. 
@@ -73,17 +62,12 @@ $ python3 run.py
 
 The submission can be found in the file __preds/submission_clean_tweet.csv__
 
-Our submission can be found [here](https://www.crowdai.org/challenges/epfl-ml-text-classification) with username ... and submission id ...
+Our submission can be found [here](https://www.crowdai.org/challenges/epfl-ml-text-classification) with username __baraschi__ and submission id __24870__
 ### Contributors
 
 - Zoé Baraschi
 - Arnaud Boissaye
 - Louis-Maxence Garret
-
-
-   [Anaconda3]: <https://www.continuum.io/downloads>
-   [Scikit-Learn]: <http://scikit-learn.org/stable/install.html>
-   [NLTK]: <http://www.nltk.org/>
 ___
 
 License: [MIT](https://opensource.org/licenses/MIT)
